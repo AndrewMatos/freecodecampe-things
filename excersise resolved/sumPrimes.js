@@ -1,0 +1,38 @@
+function sumPrimes(num) {
+ let arr=[];
+ for(let i=2;i<=num;i++){
+  if (isPrime(i)==true){
+   arr.push(i) ;
+  }
+ }
+ let ans=arr.reduce((total,element)=>{return element+total;},0)
+ return ans
+}
+
+function isPrime(n){
+  let prime=true
+  for(let i=2;i<=Math.round(Math.sqrt(n));i++){
+  if(n%i==0){prime=false}
+  }
+  return prime
+}
+
+sumPrimes(10);
+
+function des(num){
+	let  n=num;
+	let  arr=[];
+	if(isPrime(n)==false){
+	    for(i=Math.round(Math.sqrt(n));i>=2;i--){
+	  		if(n%i==0){
+	  			n/=i;
+	  			arr.push(i);
+	  			i=Math.round(Math.sqrt(n))+1;
+	  		    continue;
+	  		}
+	   	 } 		
+	}
+    if(isPrime(n)==true){ arr.push(n)};
+	return arr
+}
+

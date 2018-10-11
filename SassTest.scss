@@ -1,0 +1,107 @@
+/* variable */
+$color-text: red;
+
+/* nesting */
+
+h1 {
+	
+	p {
+
+	 }
+}
+
+/* mixin/functions */
+
+@mixin box-shadow($x, $y, $blur, $c){
+  -webkit-box-shadow: $x, $y, $blur, $c;
+  -moz-box-shadow: $x, $y, $blur, $c;
+  -ms-box-shadow: $x, $y, $blur, $c;
+  box-shadow: $x, $y, $blur, $c;
+}
+
+div {
+  @include box-shadow(0px, 0px, 4px, #fff);
+}
+
+/* Use @if and @else to Add Logic To Your Styles */
+
+@mixin text-effect($val) {
+  @if $val == danger {
+    color: red;
+  }
+  @else if $val == alert {
+    color: yellow;
+  }
+  @else if $val == success {
+    color: green;
+  }
+  @else {
+    color: black;
+  }
+}
+
+p{
+	@include text-effect(danger)
+}
+
+/* Use @for start through end (includes end) or @for start to end (excludes end) */
+
+@for $i from 1 through 12 {
+  .col-#{$i} { width: 100%/12 * $i; }
+}
+
+/* The #{$i} part is the syntax to combine a variable (i) with text to make a string. example .col-#{$i} == .col-1 */
+
+/* Use @each to Map Over Items in a List */
+
+@each $color in blue, red, green {
+  .#{$color}-text {color: $color;}
+}
+
+/*or*/
+
+$colors: (color1: blue, color2: red, color3: green);
+
+@each $key, $color in $colors {
+  .#{$color}-text {color: $color;}
+}
+
+/* both equal to */
+
+.blue-text {
+  color: blue;
+}
+
+.red-text {
+  color: red;
+}
+
+.green-text {
+  color: green;
+}
+
+/* Apply a Style Until a Condition is Met with @while */
+
+$x: 1;
+@while $x < 13 {
+  .col-#{$x} { width: 100%/12 * $x;}
+  $x: $x + 1;
+}
+
+/* to impor mixins and partiasl (partials are written with _before the name) example:  _mixins.scss */
+
+/* @import 'mixins' */
+
+/* Extend One Set of CSS Styles to Another Element */
+
+.panel{
+  background-color: red;
+  height: 70px;
+  border: 2px solid green;
+}
+
+.big-panel{
+  @extend .panel;
+  width: 150px;
+  font-size: 2em;
+}
